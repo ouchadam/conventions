@@ -1,0 +1,55 @@
+ext.applyRepositories = { dependencyResolutionManagement ->
+    dependencyResolutionManagement.repositories {
+        google {
+            content {
+                includeGroupByRegex "com\\.android.*"
+                includeGroupByRegex "com\\.google.*"
+                includeGroupByRegex "androidx\\..*"
+            }
+        }
+
+        mavenCentral {
+            content {
+                includeGroupByRegex "org\\.apache.*"
+                includeGroupByRegex "org\\.jetbrains.*"
+                includeGroupByRegex "com\\.google.*"
+                includeGroupByRegex "com\\.android.*"
+                includeGroupByRegex "org\\.ow2.*"
+                includeGroupByRegex "org\\.sonatype.*"
+
+                includeGroup "com.squareup"
+                includeGroup "com.sun.activation"
+                includeGroup "com.sun.istack"
+                includeGroup "com.sun.xml.fastinoset"
+                includeGroup "com.sun.xml.fastinfoset"
+                includeGroup "org.checkerframework"
+                includeGroup "org.bouncycastle"
+                includeGroup "org.codehaus.mojo"
+                includeGroup "org.json"
+                includeGroup "org.tensorflow"
+                includeGroup "org.jdom"
+                includeGroup "org.slf4j"
+                includeGroup "org.glassfish"
+                includeGroup "org.glassfish.jaxb"
+                includeGroup "org.bitbucket.b_c"
+                includeGroup "org.jvnet.staxex"
+                includeGroup "net.java.dev.jna"
+                includeGroup "commons-codec"
+                includeGroup "commons-io"
+                includeGroup "commons-logging"
+                includeGroup "io.grpc"
+                includeGroup "io.netty"
+                includeGroup "io.perfmark"
+                includeGroup "it.unimi.dsi"
+                includeGroup "net.sf.jopt-simple"
+                includeGroup "javax.annotation"
+                includeGroup "javax.inject"
+                includeGroup "jakarta.xml.bind"
+                includeGroup "jakarta.activation"
+                includeGroup "net.sf.kxml"
+                includeGroup "xerces"
+                includeGroup "xml-apis"
+            }
+        }
+    }
+}

@@ -2,4 +2,13 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     apply from: "gradle/repositories.gradle"
     applyRepositories(it)
+    repositories {
+        mavenCentral()
+    }
+    versionCatalogs {
+        create("conventions") {
+            from(files("gradle/conventions.versions.toml"))
+        }
+    }
 }
+

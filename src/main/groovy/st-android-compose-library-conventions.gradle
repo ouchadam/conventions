@@ -2,19 +2,45 @@ plugins {
     id 'st-android-library-conventions'
 }
 
+def conventions = parseVersionsToml("tools/conventions/gradle/conventions.versions.toml")
+
 android {
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+        kotlinCompilerExtensionVersion = conventions.versions."compose-compiler"
     }
 }
 
 dependencies {
-    implementation libs.compose.ui
-    implementation libs.compose.foundation
-    implementation libs.compose.material.three
-    implementation libs.compose.icons.extended
-    implementation libs.compose.activity
+    implementation conventions."compose-ui"
+    implementation conventions."compose-foundation"
+    implementation conventions."compose-material-three"
+    implementation conventions."compose-icons-extended"
+    implementation conventions."compose-activity"
+}
+
+// Workaround for parsing .toml versions within a precompiled script
+def parseVersionsToml(filePath) {
+    def file = rootProject.file(filePath)
+    def toml = new groovy.toml.TomlSlurper().parse(file)
+    return toGradleLike(toml)
+}
+
+def toGradleLike(toml) {
+    def collection = [:]
+    toml.libraries.each { key, value ->
+        collection[key] = artifactOf(value, toml.versions)
+    }
+    collection["versions"] = toml.versions
+    return collection
+}
+
+def artifactOf(provider, versions) {
+    def version = provider.version
+    if (!(version instanceof String)) {
+        version = versions."${version.ref}"
+    }
+    return "${provider.group}:${provider.name}:${version}"
 }

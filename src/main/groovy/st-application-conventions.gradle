@@ -6,7 +6,6 @@ plugins {
 android {
     ndkVersion "25.0.8141415"
     defaultConfig {
-        applicationId "app.dapk.st"
         def versionJson = new groovy.json.JsonSlurper().parseText(rootProject.file('version.json').text)
         versionCode versionJson.code
         versionName versionJson.name
